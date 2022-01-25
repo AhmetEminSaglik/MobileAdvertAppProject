@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context=".activities.loginsignup.LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView_Login"
+        android:layout_width="75dp"
+        android:layout_height="64dp"
+        android:src="@drawable/yeniicon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086" />
+
+    <EditText
+        android:id="@+id/usernameTxt_Login"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="52dp"
+        android:autofillHints="username"
+        android:backgroundTint="@color/pink"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColor="@color/lightgreen"
+        android:textColorHint="@color/pink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_Login"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/passwordTxt_Login"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="56dp"
+        android:autofillHints="password"
+        android:backgroundTint="@color/pink"
+
+
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="@color/lightgreen"
+        android:textColorHint="@color/pink"
+        app:layout_constraintEnd_toEndOf="@+id/usernameTxt_Login"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/usernameTxt_Login"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTxt_Login" />
+
+    <Button
+        android:id="@+id/loginBtn_Login"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/pink"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTxt_Login" />
+
+
+    <Button
+        android:id="@+id/singupPageBtn_Login"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/red"
+        android:text="Sign up Right now"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn_Login"
+        app:layout_constraintVertical_bias="0.329" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

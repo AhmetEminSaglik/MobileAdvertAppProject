@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/red"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnAddNewAdvert_myadvert_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/lightgrey"
+        android:text="Add new Advert" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView_myAdvertFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ED1A1A"></androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

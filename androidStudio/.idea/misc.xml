@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/advert_info_clicked_homepage.xml" value="0.14537037037037037" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/advert_logo.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/advertlogo_12.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/app_logo.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/exit_12.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/home_12.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/ic_baseline_invert_colors_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/profil_12.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/drawable/yeniicon.xml" value="0.3828125" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/activity_login.xml" value="0.5" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/activity_main_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/activity_sing_up.xml" value="0.33" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/advert_info_clicked_homepage.xml" value="0.33" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/advert_info_clicked_myadvertpage.xml" value="0.5" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/asdfas.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/denemeloginscreen.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/homepage_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/item_advert.xml" value="0.5" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/item_advert_carviewlayout.xml" value="0.33" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/loginscreen.xml" value="0.33" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/myadvert_fragment.xml" value="0.22" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/newadvert_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/profil_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/profil_update_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/profilupdate_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/layout/profilupdatefragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/app/src/main/res/menu/bottommenu.xml" value="0.36666666666666664" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.5" />
+      </ProjectState>
+    </option>
+  </component>
+</project>
