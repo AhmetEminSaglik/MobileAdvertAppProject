@@ -109,9 +109,8 @@ public class NewAdvertPageFragment extends Fragment {
                 advert.setUserId(customer.getId());
                 try {
                     new ValidationService().validateAdvertCreationInputs(advert);
-                    ilanPaylasmaIstegi();
-                    Fragment fragment = new MyAdvertFragment(appCompatActivity, customer);
-                    appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+                    shareAdvert();
+
 
                 } catch (Exception e) {
                     Toast.makeText(appCompatActivity.getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -156,16 +155,18 @@ public class NewAdvertPageFragment extends Fragment {
         }
     }
 
-    public void ilanPaylasmaIstegi() {
+    public void shareAdvert() {
 
 
-        StringRequest istek = new StringRequest(Request.Method.POST, "http://10.0.2.2:3000/api/advert", new Response.Listener<String>() {
+        StringRequest istek = new StringRequest(
+                Request.Method.POST,
+                "http://10.0.2.2:3000/api/advert", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(appCompatActivity.getBaseContext(), "Advert Shared succesfully", Toast.LENGTH_SHORT).show();
-                System.out.println("Response : " + response.toString());
-
-
+                Toast.makeText(appCompatActivity.getBaseContext(),
+                        "Advert Shared succesfully", Toast.LENGTH_SHORT).show();
+                Fragment fragment = new MyAdvertFragment(appCompatActivity, customer);
+                appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -204,14 +205,7 @@ public class NewAdvertPageFragment extends Fragment {
                 params.put("title", advert.getTitle());
                 params.put("description", advert.getDescription());
                 params.put("price", advert.getPrice());
-                if (advert.getImageString() != null) {
-
-                    params.put("image", advert.getImageString());
-
-                } else {
-                    params.put("image", " ");
-                }
-                System.out.println("params : " + params.toString());
+                params.put("image", advert.getImageString());
                 return params;
             }
         };

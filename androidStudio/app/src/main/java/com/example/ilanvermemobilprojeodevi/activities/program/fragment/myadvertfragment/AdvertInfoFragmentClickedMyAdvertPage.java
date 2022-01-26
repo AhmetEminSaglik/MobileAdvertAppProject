@@ -1,7 +1,5 @@
 package com.example.ilanvermemobilprojeodevi.activities.program.fragment.myadvertfragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,7 +35,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.ilanvermemobilprojeodevi.R;
 import com.example.ilanvermemobilprojeodevi.db.advert.Advert;
 import com.example.ilanvermemobilprojeodevi.db.user.Customer;
-import com.example.ilanvermemobilprojeodevi.services.AdvertValidationService;
+import com.example.ilanvermemobilprojeodevi.services.validation.AdvertValidationService;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -57,7 +55,6 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
     Button btnUpdateAdvert, btnDeleteAdvert, btnSelectPhoto;
     ImageView imageView;
     Customer customer;
-
     Bitmap bitmap;
     int SELECT_IMAGE_CODE = 1;
 
@@ -71,8 +68,6 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.advert_info_clicked_myadvertpage, container, false);
-//        Toast.makeText(mContext, "gelen item id : " + advertId, Toast.LENGTH_SHORT).show();
-
         return rootView;
     }
 
@@ -93,36 +88,23 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
         descriptionEditTxt.setText(advert.getDescription());
         priceEditTxt.setText(advert.getPrice());
         new DownLoadImageTask(imageView).execute("http://10.0.2.2:3000" + advert.getImageString());
-        btnDeleteAdvert = appCompatActivity.findViewById(R.id.btnDeleteAdvert_adverInfoClicked_MyAdvertPage);
 
-        btnDeleteAdvert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verileriSilmeIstegi();
-            }
-        });
         btnSelectPhoto = appCompatActivity.findViewById(R.id.btmSelectPhoto_adverInfoClicked_MyAdvertPage);
-        btnSelectPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("tiklandiu");
-                resimGoster();
-            }
-        });
-
         btnUpdateAdvert = appCompatActivity.findViewById(R.id.btnUpdateAdvert_adverInfoClicked_MyAdvertPage);
         btnDeleteAdvert = appCompatActivity.findViewById(R.id.btnDeleteAdvert_adverInfoClicked_MyAdvertPage);
 
+        setSelectPhotoFunction(btnSelectPhoto);
         setUpdateBtnFunction(btnUpdateAdvert);
         setDeleteBtnFunction(btnDeleteAdvert);
+    }
 
-     /*   btnUpdateAdvert.setOnClickListener(new View.OnClickListener() {
+    void setSelectPhotoFunction(Button button) {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verileriGuncellemeIstegi();
+                resimGoster();
             }
-        });*/
-
+        });
     }
 
     void setUpdateBtnFunction(Button button) {
@@ -130,14 +112,11 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-
                     advert.setTitle(titleEditTxt.getText().toString());
                     advert.setDescription(descriptionEditTxt.getText().toString());
                     advert.setPrice(priceEditTxt.getText().toString());
-//                    advert.setImageString(imageToString());
                     if (new AdvertValidationService().validate(advert)) {
-                        verileriGuncellemeIstegi();
-
+                        updateDataRequest();
                     }
                 } catch (Exception e) {
                     Toast.makeText(appCompatActivity.getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -148,21 +127,23 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
 
     }
 
-    void switchFragmentToMyAdvertPageFragment() {
-        Fragment fragment = new MyAdvertFragment(appCompatActivity, customer);
-        appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
-    }
-
     void setDeleteBtnFunction(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verileriSilmeIstegi();
+                deleteDataRequest();
                 switchFragmentToMyAdvertPageFragment();
             }
         });
 
     }
+
+
+    void switchFragmentToMyAdvertPageFragment() {
+        Fragment fragment = new MyAdvertFragment(appCompatActivity, customer);
+        appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
 
     public void resimGoster() {
         Intent intent = new Intent();
@@ -220,8 +201,6 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-//        Uri uri = data.getData();
-//        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  clickedMyAdverPadge " + SELECT_IMAGE_CODE + " " + activity.RESULT_OK + " " + data.toString());
         if (requestCode == SELECT_IMAGE_CODE && resultCode == appCompatActivity.RESULT_OK && data != null) {
 
 
@@ -239,28 +218,16 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
         }
     }
 
-    public void verileriSilmeIstegi() {
-//        Toast.makeText(getContext(), "Guncelleme istegi gonderildi guncellenecek user id : " + customer.getId(), Toast.LENGTH_SHORT).show();
-
-        StringRequest istek = new StringRequest(Request.Method.DELETE, "http://10.0.2.2:3000/api/advert/" + advert.getId(), new Response.Listener<String>() {
+    public void deleteDataRequest() {
+        StringRequest istek = new StringRequest(
+                Request.Method.DELETE,
+                "http://10.0.2.2:3000/api/advert/" + advert.getId()
+                , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(appCompatActivity.getBaseContext(), "Advert Deleted Succesfully", Toast.LENGTH_SHORT).show();
                 switchFragmentToMyAdvertPageFragment();
-         /*       try {
-//                    Toast.makeText(appCompatActivity.getBaseContext(), "Advert is deleted", Toast.LENGTH_LONG).show();
-//                    System.out.println("gelen cevap : " + response);
-//                    JSONObject jsonObject = new JSONObject(response);
-//                    System.out.println("+++++");
-//                    System.out.println(jsonObject.toString());
-//                    System.out.println("-----");
 
-
-                } catch (JSONException e) {
-                    System.out.println("hataya dustuuuuuuuuuuuu " + e.getMessage());
-                    e.printStackTrace();
-                }
-*/
             }
         }, new Response.ErrorListener() {
             @Override
@@ -291,7 +258,7 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
                 }
 
             }
-        }) {
+        });/* {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -303,31 +270,32 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
                 System.out.println("params.toString() : " + params.toString());
                 return params;
             }
-        };
+        };*/
 
         Volley.newRequestQueue(appCompatActivity.getBaseContext()).add(istek);
 
 
     }
 
-    public void verileriGuncellemeIstegi() {
-//        Toast.makeText(getContext(), "Guncelleme istegi gonderildi guncellenecek user id : " + customer.getId(), Toast.LENGTH_SHORT).show();
-
-        StringRequest istek = new StringRequest(Request.Method.PUT, "http://10.0.2.2:3000/api/advert/" + advert.getId(), new Response.Listener<String>() {
+    public void updateDataRequest() {
+        StringRequest istek = new StringRequest(
+                Request.Method.PUT,
+                "http://10.0.2.2:3000/api/advert/" + advert.getId()
+                , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(appCompatActivity.getBaseContext(), "Advert updated Succesfully", Toast.LENGTH_SHORT).show();
-                try {
-                    System.out.println("gelen cevap : " + response);
-                    JSONObject jsonObject = new JSONObject(response);
-                    System.out.println("+++++");
-                    System.out.println(jsonObject.toString());
-                    System.out.println("-----");
+/*                try {
+//                    System.out.println("gelen cevap : " + response);
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    System.out.println("+++++");
+//                    System.out.println(jsonObject.toString());
+//                    System.out.println("-----");
 
                 } catch (JSONException e) {
                     System.out.println("hataya dustuuuuuuuuuuuu " + e.getMessage());
                     e.printStackTrace();
-                }
+                }*/
                 switchFragmentToMyAdvertPageFragment();
             }
         }, new Response.ErrorListener() {

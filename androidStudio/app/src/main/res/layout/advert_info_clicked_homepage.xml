@@ -147,7 +147,7 @@
                             <TextView
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
-                                android:text="Phone Number"
+                                android:text="Phone No"
                                 android:textSize="15sp" />
 
                             <LinearLayout

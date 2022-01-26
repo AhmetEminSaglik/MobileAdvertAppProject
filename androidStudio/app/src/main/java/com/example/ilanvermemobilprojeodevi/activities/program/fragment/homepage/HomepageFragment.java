@@ -67,29 +67,26 @@ public class HomepageFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 
-        verileriGetir();
+        getDataWithWebservice();
         adapter = new AdvertAdapter(activity, adverList);
         recyclerView.setAdapter(adapter);
 
 
     }
 
-    public void verileriGetir() {
-//        Toast.makeText(activity.getBaseContext(), "FONKSIYONA GIRDI ", Toast.LENGTH_SHORT).show();
-        StringRequest istek = new StringRequest(Request.Method.GET, "http://10.0.2.2:3000/api/advert", new Response.Listener<String>() {
+    public void getDataWithWebservice() {
+        StringRequest istek = new StringRequest(
+                Request.Method.GET,
+                "http://10.0.2.2:3000/api/advert", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     //Gelen cevabı jsonarray e çevirdik
                     JSONArray jsonArray = new JSONArray(response);
 
-
                     if (jsonArray.length() == 0) {
                         Toast.makeText(activity.getBaseContext(), "Could not find any Advert to load", Toast.LENGTH_SHORT).show();
-
                     } else {
-//                        Toast.makeText(activity.getBaseContext(), "GELDIIII", Toast.LENGTH_SHORT).show();
-                        //Gelen arrayden ilk objeyi aldık
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String id = jsonObject.getString("id");

@@ -204,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getBaseContext(), "hata ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "hata "+error.getMessage(), Toast.LENGTH_SHORT).show();
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     //This indicates that the reuest has either time out or there is no connection

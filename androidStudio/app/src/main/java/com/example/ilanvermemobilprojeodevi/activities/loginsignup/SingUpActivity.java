@@ -99,13 +99,15 @@ public class SingUpActivity extends AppCompatActivity {
 
     }
 
-    public static void signUpUser(Context context, Customer customer) {
+    public void signUpUser(Context context, Customer customer) {
 
 
         StringRequest istek = new StringRequest(Request.Method.POST, "http://10.0.2.2:3000/api/user", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(context, "Kayit Basarili", Toast.LENGTH_SHORT).show();
+                String toastMessage = "Signed up successfully, you can log in";
+                Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show();
+                switchActivityToNewActivity(LoginActivity.class);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -177,8 +179,6 @@ public class SingUpActivity extends AppCompatActivity {
         String toastMessage;
         try {
             if (validationService.validateSingUpProcess(customer)) {
-                toastMessage = "kaydiniz tamamlandi, programa giris yapabilirsiniz";
-                Toast.makeText(getBaseContext(), toastMessage, Toast.LENGTH_SHORT).show();
                 return true;
             }
         } catch (Exception e) {

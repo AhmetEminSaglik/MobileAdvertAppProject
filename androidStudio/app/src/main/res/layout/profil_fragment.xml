@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="40dp"
+    android:layout_marginLeft="30dp"
     android:layout_marginTop="30dp"
-    android:layout_marginRight="40dp"
+    android:layout_marginRight="30dp"
     android:orientation="vertical">
 
 
@@ -31,7 +31,7 @@
         <TextView
 
             android:id="@+id/username_profilFragment"
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:cursorVisible="false"
@@ -63,7 +63,7 @@
 
         <TextView
             android:id="@+id/fullName_profilFragment"
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:cursorVisible="false"
@@ -94,7 +94,7 @@
 
         <TextView
             android:id="@+id/phoneNo_profilFragment"
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:cursorVisible="false"
@@ -125,7 +125,7 @@
 
         <TextView
             android:id="@+id/eMail_profilFragment"
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:cursorVisible="false"

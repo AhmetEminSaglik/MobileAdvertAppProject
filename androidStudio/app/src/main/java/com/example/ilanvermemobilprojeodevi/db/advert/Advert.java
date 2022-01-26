@@ -58,6 +58,9 @@ public class Advert {
     }
 
     public String getImageString() {
+        if (imageString == null) {
+            imageString = " ";
+        }
         return imageString;
     }
 

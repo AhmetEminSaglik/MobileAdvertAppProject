@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="40dp"
+    android:layout_marginLeft="30dp"
     android:layout_marginTop="30dp"
-    android:layout_marginRight="40dp"
+    android:layout_marginRight="30dp"
     android:orientation="vertical">
 
 
@@ -39,7 +39,7 @@
 
         <EditText
             android:id="@+id/usernametxt_profilUpdateFragment"
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="50sp"
             android:clickable="false"
             android:cursorVisible="false"
@@ -80,7 +80,7 @@
 
         <EditText
             android:id="@+id/fullNameTxt_profilUpdateFragment"
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="50sp"
             android:hint="Client Full Name "
             android:inputType="textPersonName"
@@ -117,7 +117,7 @@
 
         <EditText
             android:id="@+id/passwordTxt_profilUpdateFragment"
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="50sp"
             android:hint="Client password "
             android:inputType="textPassword"
@@ -155,7 +155,7 @@
         <EditText
 
             android:id="@+id/phoneNoTxt_profilUpdateFragment"
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="50sp"
             android:hint="Client Phone No "
             android:inputType="phone"
@@ -192,7 +192,7 @@
 
         <EditText
             android:id="@+id/mailTxt_profilUpdateFragment"
-            android:layout_width="200sp"
+            android:layout_width="match_parent"
             android:layout_height="50sp"
             android:hint="Client mail "
             android:inputType="textEmailAddress"
