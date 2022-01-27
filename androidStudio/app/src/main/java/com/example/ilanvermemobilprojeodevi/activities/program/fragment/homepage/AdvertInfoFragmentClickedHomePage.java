@@ -1,16 +1,10 @@
 package com.example.ilanvermemobilprojeodevi.activities.program.fragment.homepage;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,27 +25,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ilanvermemobilprojeodevi.R;
-import com.example.ilanvermemobilprojeodevi.activities.program.fragment.myadvertfragment.AdvertInfoFragmentClickedMyAdvertPage;
-import com.example.ilanvermemobilprojeodevi.activities.program.mainmenu.MainMenuActivity;
 import com.example.ilanvermemobilprojeodevi.db.advert.Advert;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class AdvertInfoFragmentClickedHomePage extends Fragment {
 
     Activity activity;
     Advert advert;
-    Button updateBtnAdvert, deleteBtnAdvert;
     String ownerFullName, ownerPhoneNo, ownerEMail;
     TextView titleTxtView, descriptionTxtView, priceTxtView, ownerFullNameTxtView, ownerPhoneNoTxtView, ownerEMailTxtView;
     ImageView imageView;
@@ -92,57 +78,42 @@ public class AdvertInfoFragmentClickedHomePage extends Fragment {
         kullaniciBilgileriniGetir();
 
     }
+
     public void kullaniciBilgileriniGetir() {
 
-        StringRequest istek = new StringRequest(Request.Method.GET, "http://10.0.2.2:3000/api/user/find/" + advert.getUserId(), new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
+        StringRequest istek = new StringRequest(Request.Method.GET, "http://10.0.2.2:3000/api/user/find/" + advert.getUserId(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
 
-                    //Gelen cevabı jsonarray e çevirdik
+                            //Gelen cevabı jsonarray e çevirdik
 
-                    System.out.println("gelen cevap : " + response);
-                    JSONObject jsonObject = new JSONObject(response);
-                    if (response.isEmpty()) {
-                        Toast.makeText(activity.getBaseContext(), "BASARISIZ", Toast.LENGTH_SHORT).show();
-                    } else {
-                        System.out.println("GELEN OBJECT : " + jsonObject);
-                        System.out.println(jsonObject.getString("id"));
+                            System.out.println("gelen cevap : " + response);
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (response.isEmpty()) {
+                                Toast.makeText(activity.getBaseContext(), "BASARISIZ", Toast.LENGTH_SHORT).show();
+                            } else {
+                                System.out.println("GELEN OBJECT : " + jsonObject);
+                                System.out.println(jsonObject.getString("id"));
 
-                        ownerEMail = jsonObject.getString("mail");
-                        ownerFullName = jsonObject.getString("fullName");
-                        ownerPhoneNo = jsonObject.getString("phone");
-                        ownerEMailTxtView.setText(ownerEMail);
-                        ownerFullNameTxtView.setText(ownerFullName);
-                        ownerPhoneNoTxtView.setText(ownerPhoneNo);
+                                ownerEMail = jsonObject.getString("mail");
+                                ownerFullName = jsonObject.getString("fullName");
+                                ownerPhoneNo = jsonObject.getString("phone");
+                                ownerEMailTxtView.setText(ownerEMail);
+                                ownerFullNameTxtView.setText(ownerFullName);
+                                ownerPhoneNoTxtView.setText(ownerPhoneNo);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
-                /*    if (jsonObject.length() == 0) {
-                        Toast.makeText(activity.getBaseContext(), "BASARISIZ", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(activity.getBaseContext(), "User bilgileri getirildi", Toast.LENGTH_SHORT).show();
-
-                        //Gelen arrayden ilk objeyi aldık
-                       *//* JSONObject b = jsonObject.getJSONObject();
-                        System.out.println(b);
-
-                        ownerEMail = b.getString("mail");
-                        ownerFullName = b.getString("fullName");
-                        ownerPhoneNo = b.getString("phone");
-                        ownerEMailTxtView.setText(ownerEMail);
-                        ownerFullNameTxtView.setText(ownerFullName);
-                        ownerPhoneNoTxtView.setText(ownerPhoneNo);*//*
-                    }*/
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(activity.getBaseContext(), "onErrorResponse Girdi\n" + error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(activity.getBaseContext(), "onErrorResponse \n" + error.getMessage(), Toast.LENGTH_LONG).show();
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     //This indicates that the reuest has either time out or there is no connection
@@ -163,9 +134,7 @@ public class AdvertInfoFragmentClickedHomePage extends Fragment {
                 } else if (error instanceof ParseError) {
                     // Indicates that the server response could not be parsed
                     System.out.println("ParseError");
-
                 }
-
             }
         }) {
             @Override
@@ -176,10 +145,7 @@ public class AdvertInfoFragmentClickedHomePage extends Fragment {
                 return params;
             }
         };
-
         Volley.newRequestQueue(activity.getBaseContext()).add(istek);
-
-
     }
 
 

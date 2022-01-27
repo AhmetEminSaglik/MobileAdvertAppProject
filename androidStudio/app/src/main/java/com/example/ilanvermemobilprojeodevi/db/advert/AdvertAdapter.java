@@ -7,21 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-
 import com.example.ilanvermemobilprojeodevi.R;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.CardViewAdvertObjectHolder> {
     private Context mContext;
     private List<Advert> advertList;
-//    private View.OnClickListener clickListener;
 
     public AdvertAdapter(Context mContext, List<Advert> advertList) {
         this.mContext = mContext;
@@ -49,8 +44,6 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.CardViewAd
         Picasso.get().load("http://10.0.2.2:3000" + advert.getImageString()).into(holder.imageView);
     }
 
-    void setAdvertClickFunction() {
-    }
 
     @Override
     public int getItemCount() {
@@ -62,8 +55,8 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.CardViewAd
         public ImageView imageView;
         public TextView title;
         public TextView description;
-        public TextView date;
-        public View.OnClickListener clickListener;
+//        public TextView date;
+//        public View.OnClickListener clickListener;
 
 
         public CardViewAdvertObjectHolder(@NonNull View itemView) {
@@ -73,21 +66,8 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.CardViewAd
             description = itemView.findViewById(R.id.txtDescription_ItemAdvert);
 //            date = itemView.findViewById(R.id.txtDate_ItemAdvert);
             id = itemView.findViewById(R.id.advertCardviewId);
-        /*    itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(mContext, "tiklandi name : " + title, Toast.LENGTH_LONG).show();
-                    System.out.println("TIKLANDI TITLE : " + title);
-                }
-            });*/
+
         }
     }
 
-    /*public View.OnClickListener getClickListener() {
-        return clickListener;
-    }
-
-    public void setClickListener(View.OnClickListener clickListener) {
-        this.clickListener = clickListener;
-    }*/
 }

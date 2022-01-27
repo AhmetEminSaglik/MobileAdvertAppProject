@@ -1,9 +1,7 @@
 package com.example.ilanvermemobilprojeodevi.activities.program.fragment.myadvertfragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -33,8 +31,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ilanvermemobilprojeodevi.R;
-import com.example.ilanvermemobilprojeodevi.activities.program.fragment.profil.ProfilFragment;
-import com.example.ilanvermemobilprojeodevi.activities.program.mainmenu.MainMenuActivity;
 import com.example.ilanvermemobilprojeodevi.db.advert.Advert;
 import com.example.ilanvermemobilprojeodevi.db.user.Customer;
 import com.example.ilanvermemobilprojeodevi.services.ValidationService;
@@ -82,13 +78,6 @@ public class NewAdvertPageFragment extends Fragment {
 
     }
 
-    /*
-                if (validateInputValues(customer)) {
-                    sendProfilUpdateRequest();
-                    Fragment fragment = new ProfilFragment(appCompatActivity, customer);
-                    appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ProfilFragment(appCompatActivity, customer)).commit();
-
-                }*/
     void setBtnSelectPhotoFunction(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,12 +99,9 @@ public class NewAdvertPageFragment extends Fragment {
                 try {
                     new ValidationService().validateAdvertCreationInputs(advert);
                     shareAdvert();
-
-
                 } catch (Exception e) {
                     Toast.makeText(appCompatActivity.getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
@@ -125,8 +111,6 @@ public class NewAdvertPageFragment extends Fragment {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, SELECT_IMAGE_CODE);
-
-
     }
 
     public String imageToString() {
@@ -148,16 +132,14 @@ public class NewAdvertPageFragment extends Fragment {
                 bitmap = MediaStore.Images.Media.getBitmap(appCompatActivity.getContentResolver(), uri);
                 imageView.setVisibility(View.VISIBLE);
                 advert.setImageString(imageToString());
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
+
     public void shareAdvert() {
-
-
         StringRequest istek = new StringRequest(
                 Request.Method.POST,
                 "http://10.0.2.2:3000/api/advert", new Response.Listener<String>() {
@@ -209,10 +191,7 @@ public class NewAdvertPageFragment extends Fragment {
                 return params;
             }
         };
-
         Volley.newRequestQueue(appCompatActivity.getBaseContext()).add(istek);
-
-
     }
 
 }

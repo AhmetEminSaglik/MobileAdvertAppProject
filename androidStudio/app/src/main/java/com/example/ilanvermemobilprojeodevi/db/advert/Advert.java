@@ -22,16 +22,6 @@ public class Advert {
         this.userId = userId;
     }
 
- /*   public Advert(String id, String title, String description, String image, String date, String price, String userId, View.OnClickListener clickListener) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.image = image;
-        this.date = date;
-        this.price = price;
-        this.userId = userId;
-        this.clickListener = clickListener;
-    }*/
 
     public String getId() {
         return id;

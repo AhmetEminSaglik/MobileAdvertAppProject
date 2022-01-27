@@ -1,20 +1,16 @@
 package com.example.ilanvermemobilprojeodevi.activities.program.fragment.profil;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -27,13 +23,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ilanvermemobilprojeodevi.R;
-import com.example.ilanvermemobilprojeodevi.activities.program.mainmenu.MainMenuActivity;
 import com.example.ilanvermemobilprojeodevi.db.user.Customer;
 import com.example.ilanvermemobilprojeodevi.services.ValidationService;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,8 +46,6 @@ public class ProfilUpdateFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.profilupdate_fragment, container, false);
-//        Button button = rootView.findViewById(R.id.btnUpdate_ProfilUpdateFragment);
-//        setButtonFunction(button);
         return rootView;
     }
 
@@ -77,13 +66,6 @@ public class ProfilUpdateFragment extends Fragment {
         btnUpdate = appCompatActivity.findViewById(R.id.btnUpdate_ProfilUpdateFragment);
 
         setbtnUpdateFunction(btnUpdate);
-/*        activity.findViewById(R.id.btnUpdate_ProfilUpdateFragment).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
     }
 
     void setbtnUpdateFunction(Button button) {
@@ -100,18 +82,14 @@ public class ProfilUpdateFragment extends Fragment {
                     sendProfilUpdateRequest();
                     Fragment fragment = new ProfilFragment(appCompatActivity, customer);
                     appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ProfilFragment(appCompatActivity, customer)).commit();
-
                 }
             }
         });
-
     }
 
     boolean validateInputValues(Customer customer) {
-
         try {
             if (validationService.validateProfilUpdateProcess(customer)) {
-
                 return true;
             }
         } catch (Exception e) {
@@ -125,51 +103,10 @@ public class ProfilUpdateFragment extends Fragment {
         StringRequest istek = new StringRequest(Request.Method.PUT, "http://10.0.2.2:3000/api/user/" + customer.getId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
-
-                    //Gelen cevabı jsonarray e çevirdik
-
-                    System.out.println("gelen cevap : " + response);
-                    JSONObject jsonObject = new JSONObject(response);
-                    System.out.println("+++++");
-                    System.out.println(jsonObject.toString());
-                    System.out.println("-----");
-                    if (response.isEmpty()) {
-                        Toast.makeText(appCompatActivity.getBaseContext(), "ERROR (Profil Update Fragment --> sendProfilUpdateRequest()): RESPONSE IS EMPTY ", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        System.out.println("GELEN OBJECT : " + jsonObject);
-//                        System.out.println(jsonObject.getString("id"));
-//                        Toast.makeText(activity.getBaseContext(), "RESPONSE IS NOT EMPTY ", Toast.LENGTH_SHORT).show();
-//                        ownerEMail = jsonObject.getString("mail");
-//                        ownerFullName = jsonObject.getString("fullName");
-//                        ownerPhoneNo = jsonObject.getString("phone");
-//                        ownerEMailTxtView.setText(ownerEMail);
-//                        ownerFullNameTxtView.setText(ownerFullName);
-//                        ownerPhoneNoTxtView.setText(ownerPhoneNo);
-                    }
-//                    if (jsonObject.length() == 0) {
-//                        Toast.makeText(appCompatActivity.getBaseContext(), "json objext lenggh = 0", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Toast.makeText(appCompatActivity.getBaseContext(), "json objext lenggh " + jsonObject.length(), Toast.LENGTH_SHORT).show();
-//
-//                        //Gelen arrayden ilk objeyi aldık
-////                      JSONObject b = jsonObject.getJSONObject();
-////                        System.out.println(b);
-//
-////                        ownerEMail = b.getString("mail");
-////                        ownerFullName = b.getString("fullName");
-////                        ownerPhoneNo = b.getString("phone");
-////                        ownerEMailTxtView.setText(ownerEMail);
-////                        ownerFullNameTxtView.setText(ownerFullName);
-////                        ownerPhoneNoTxtView.setText(ownerPhoneNo);*//**//*
-//                    }
-
-                    Toast.makeText(appCompatActivity.getBaseContext(), " Updated Succesfully", Toast.LENGTH_LONG).show();
-                } catch (JSONException e) {
-                    System.out.println("hataya dustuuuuuuuuuuuu " + e.getMessage());
-                    e.printStackTrace();
+                if (response.isEmpty()) {
+                    Toast.makeText(appCompatActivity.getBaseContext(), "ERROR (Profil Update Fragment --> sendProfilUpdateRequest()): RESPONSE IS EMPTY ", Toast.LENGTH_SHORT).show();
                 }
+                Toast.makeText(appCompatActivity.getBaseContext(), " Updated Succesfully", Toast.LENGTH_LONG).show();
 
             }
         }, new Response.ErrorListener() {
@@ -197,9 +134,7 @@ public class ProfilUpdateFragment extends Fragment {
                 } else if (error instanceof ParseError) {
                     // Indicates that the server response could not be parsed
                     System.out.println("ParseError");
-
                 }
-
             }
         }) {
             @Override
@@ -212,7 +147,6 @@ public class ProfilUpdateFragment extends Fragment {
                 params.put("phone", customer.getPhoneNo());
                 params.put("mail", customer.geteMail());
 
-                System.out.println("params.toString() : " + params.toString());
                 return params;
             }
         };

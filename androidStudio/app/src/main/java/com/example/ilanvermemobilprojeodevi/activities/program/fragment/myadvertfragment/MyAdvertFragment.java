@@ -1,20 +1,17 @@
 package com.example.ilanvermemobilprojeodevi.activities.program.fragment.myadvertfragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -27,20 +24,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ilanvermemobilprojeodevi.R;
-import com.example.ilanvermemobilprojeodevi.activities.program.fragment.homepage.AdvertInfoFragmentClickedHomePage;
 import com.example.ilanvermemobilprojeodevi.activities.program.mainmenu.MainMenuActivity;
 import com.example.ilanvermemobilprojeodevi.db.advert.Advert;
 import com.example.ilanvermemobilprojeodevi.db.advert.AdvertAdapter;
 import com.example.ilanvermemobilprojeodevi.db.user.Customer;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class MyAdvertFragment extends Fragment {
     private AppCompatActivity appCompatActivity;
@@ -60,7 +51,6 @@ public class MyAdvertFragment extends Fragment {
         return rootView;
     }
 
-    ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
 
     @Override
     public void onResume() {
@@ -77,7 +67,6 @@ public class MyAdvertFragment extends Fragment {
             public void onClick(View v) {
                 ((MainMenuActivity) getActivity()).getSupportFragmentManager()
                         .beginTransaction().replace(R.id.fragmentContainer, new NewAdvertPageFragment(appCompatActivity, customer)).commit();
-//                adverList.clear();
                 System.out.println("LISTE SIZE : " + adverList.size());
             }
         });
@@ -86,12 +75,10 @@ public class MyAdvertFragment extends Fragment {
     public void createHomePageAdverts() {
         RecyclerView recyclerView = appCompatActivity.findViewById(R.id.recycleView_myAdvertFragment);
 
-        System.out.println("recyclerView " + recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(appCompatActivity));
 
         adapter = new AdvertAdapter(appCompatActivity, adverList);
-
         recyclerView.setAdapter(adapter);
 
         verileriGetir();
@@ -99,50 +86,44 @@ public class MyAdvertFragment extends Fragment {
     }
 
     public void verileriGetir() {
-//        Toast.makeText(appCompatActivity.getBaseContext(), "VERILER GETIRILME ISTEGI  ", Toast.LENGTH_SHORT).show();
-        StringRequest istek = new StringRequest(Request.Method.GET, "http://10.0.2.2:3000/api/advert/user/" + customer.getId(), new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    //Gelen cevabı jsonarray e çevirdik
-                    JSONArray jsonArray = new JSONArray(response);
+        StringRequest istek = new StringRequest(Request.Method.GET, "http://10.0.2.2:3000/api/advert/user/" + customer.getId(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            //Gelen cevabı jsonarray e çevirdik
+                            JSONArray jsonArray = new JSONArray(response);
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String id = jsonObject.getString("id");
-                        String title = jsonObject.getString("title");
-                        String description = jsonObject.getString("description");
-                        String image = jsonObject.getString("image");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String id = jsonObject.getString("id");
+                                String title = jsonObject.getString("title");
+                                String description = jsonObject.getString("description");
+                                String image = jsonObject.getString("image");
 //                        String date = jsonObject.getString("updatedAt");
-                        String userId = jsonObject.getString("userId");
-                        String price = jsonObject.getString("price");
+                                String userId = jsonObject.getString("userId");
+                                String price = jsonObject.getString("price");
 
-                        Advert advert = new Advert(id, title, description, image, price, userId);
-                        System.out.println("IMAGE : " + advert.getImageString());
-                        advert.setClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                getActivity().getSupportFragmentManager().
-                                        beginTransaction().replace(R.id.fragmentContainer, new AdvertInfoFragmentClickedMyAdvertPage(appCompatActivity, advert, customer)).commit();
+                                Advert advert = new Advert(id, title, description, image, price, userId);
+                                System.out.println("IMAGE : " + advert.getImageString());
+                                advert.setClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        getActivity().getSupportFragmentManager().
+                                                beginTransaction().replace(R.id.fragmentContainer, new AdvertInfoFragmentClickedMyAdvertPage(appCompatActivity, advert, customer)).commit();
+                                    }
+                                });
+                                adverList.add(advert);
                             }
-                        });
-                        adverList.add(advert);
-                        adapter.notifyDataSetChanged();
-//                        adapter.notifyDataSetChanged();
+                            adapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-
-                    System.out.println("ekleme sonrasi DIZI VERI KONTROLU : " + adverList.size());
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(appCompatActivity.getBaseContext(), "hata ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(appCompatActivity.getBaseContext(), "On ErrorResponse \n", Toast.LENGTH_SHORT).show();
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     //This indicates that the reuest has either time out or there is no connection
@@ -162,20 +143,9 @@ public class MyAdvertFragment extends Fragment {
                 } else if (error instanceof ParseError) {
                     // Indicates that the server response could not be parsed
                     System.out.println("ParseError");
-
                 }
-
             }
-        })/* {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("username", username);
-                params.put("password", password);
-
-                return params;
-            }
-        }*/;
+        });
 
         Volley.newRequestQueue(appCompatActivity.getBaseContext()).add(istek);
 

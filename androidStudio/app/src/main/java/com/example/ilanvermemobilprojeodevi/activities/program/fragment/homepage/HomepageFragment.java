@@ -55,29 +55,23 @@ public class HomepageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        createHomePageAdverts();// benim kendi kodlarim calisiyor
+        createHomePageAdverts();
     }
-
 
     public void createHomePageAdverts() {
         RecyclerView recyclerView = activity.findViewById(R.id.recycleView_HomePageFragment);
 
-
-        System.out.println("recyclerView " + recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 
         getDataWithWebservice();
         adapter = new AdvertAdapter(activity, adverList);
         recyclerView.setAdapter(adapter);
-
-
     }
 
     public void getDataWithWebservice() {
-        StringRequest istek = new StringRequest(
-                Request.Method.GET,
-                "http://10.0.2.2:3000/api/advert", new Response.Listener<String>() {
+        StringRequest istek = new StringRequest(Request.Method.GET, "http://10.0.2.2:3000/api/advert",
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -106,28 +100,8 @@ public class HomepageFragment extends Fragment {
                                 }
                             });
                             adverList.add(advert);
-
-//                            adverList.sort();
                         }
                         adapter.notifyDataSetChanged();
-                        System.out.println("ekleme sonrasi DIZI VERI KONTROLU : " + adverList.size());
-                     /*   System.out.println("++++++++++++++++++++++++++++++++" +));
-                        JSONObject b = jsonArray.getJSONObject(0);
-
-                        System.out.println("HOMEPAGEFRAGMENT  : " + b);
-                        //İlk objenin id isimli value'sini aldık
-                        String id = b.getString("id");
-                        String username = b.getString("username");
-                        String mail = b.getString("mail");
-                        String fullName = b.getString("fullName");
-                        String password = b.getString("password");
-                        String phone = b.getString("phone");*/
-
-
-                        //Veri alma
-//                        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-//                        String kayitliId = prefs.getString("id", "null");
-
 
                     }
                 } catch (JSONException e) {
@@ -139,7 +113,7 @@ public class HomepageFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(activity.getBaseContext(), "hata ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity.getBaseContext(), "On ErrorResponse \n", Toast.LENGTH_SHORT).show();
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     //This indicates that the reuest has either time out or there is no connection
@@ -159,24 +133,10 @@ public class HomepageFragment extends Fragment {
                 } else if (error instanceof ParseError) {
                     // Indicates that the server response could not be parsed
                     System.out.println("ParseError");
-
                 }
-
             }
-        })/* {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("username", username);
-                params.put("password", password);
-
-                return params;
-            }
-        }*/;
-
+        });
         Volley.newRequestQueue(activity.getBaseContext()).add(istek);
-
-
     }
 
 }

@@ -1,7 +1,6 @@
 package com.example.ilanvermemobilprojeodevi.activities.loginsignup;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -24,7 +22,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.ilanvermemobilprojeodevi.R;
 import com.example.ilanvermemobilprojeodevi.db.user.Customer;
 import com.example.ilanvermemobilprojeodevi.services.ValidationService;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +29,6 @@ public class SingUpActivity extends AppCompatActivity {
 
     EditText usernameEditText, passwordEditText, phoneNoEditText, fullNameEditText, eMailEditText;
     ValidationService validationService = new ValidationService();
-//    ICRUD icrud = Database.getCustomerDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,36 +37,13 @@ public class SingUpActivity extends AppCompatActivity {
 
         setloginPageBtnProcess(findViewById(R.id.loginPageBtn_SingUp));
         setSignUpBtnProcess(findViewById(R.id.signUpBtn_SingUp));
-
-
-    }
-
-
-    String getTextFromEditText(EditText editText) {
-        return editText.getText().toString();
-    }
-
-
-    void switchActivityToNewActivity(Class clazz) {
-        Intent intent = new Intent(this, clazz);
-        startActivity(intent);
-
-        finish();
-
     }
 
     void setSignUpBtnProcess(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 signUpUser();
-//                if (validateSingUp(newCustomer)) {
-//                    icrud.add(newCustomer);
-
-//                    switchActivityToNewActivity(LoginActivity.class);
-//                }
-
             }
         });
     }
@@ -91,17 +64,12 @@ public class SingUpActivity extends AppCompatActivity {
         Customer newCustomer = createCustomerFromEnteredValues(fullName, username, password, phoneNo, eMail);
         System.out.println(newCustomer.toString());
 
-
-        //TODO validate yapilacak
         if (validateSingUp(newCustomer)) {
             signUpUser(getBaseContext(), newCustomer);
         }
-
     }
 
     public void signUpUser(Context context, Customer customer) {
-
-
         StringRequest istek = new StringRequest(Request.Method.POST, "http://10.0.2.2:3000/api/user", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -112,8 +80,6 @@ public class SingUpActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     //This indicates that the reuest has either time out or there is no connection
                     System.out.println("timeout");
@@ -149,10 +115,7 @@ public class SingUpActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         Volley.newRequestQueue(context).add(istek);
-
-
     }
 
     Customer createCustomerFromEnteredValues(String fullName, String username, String passwordTxt, String phoneTxt, String eMail) {
@@ -176,7 +139,6 @@ public class SingUpActivity extends AppCompatActivity {
     }
 
     boolean validateSingUp(Customer customer) {
-        String toastMessage;
         try {
             if (validationService.validateSingUpProcess(customer)) {
                 return true;
@@ -185,5 +147,15 @@ public class SingUpActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         return false;
+    }
+
+    String getTextFromEditText(EditText editText) {
+        return editText.getText().toString();
+    }
+
+    void switchActivityToNewActivity(Class clazz) {
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
+        finish();
     }
 }

@@ -15,12 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -37,10 +35,6 @@ import com.example.ilanvermemobilprojeodevi.db.advert.Advert;
 import com.example.ilanvermemobilprojeodevi.db.user.Customer;
 import com.example.ilanvermemobilprojeodevi.services.validation.AdvertValidationService;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -202,26 +196,20 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == SELECT_IMAGE_CODE && resultCode == appCompatActivity.RESULT_OK && data != null) {
-
-
             Uri uri = data.getData();
-
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(appCompatActivity.getContentResolver(), uri);
                 advert.setImageString(imageToString());
 
                 Picasso.get().load(uri).into(imageView);
             } catch (IOException e) {
-                System.out.println("CATCHE DUSTU");
                 e.printStackTrace();
             }
         }
     }
 
     public void deleteDataRequest() {
-        StringRequest istek = new StringRequest(
-                Request.Method.DELETE,
-                "http://10.0.2.2:3000/api/advert/" + advert.getId()
+        StringRequest istek = new StringRequest(Request.Method.DELETE, "http://10.0.2.2:3000/api/advert/" + advert.getId()
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -243,7 +231,6 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
                     System.out.println("AuthFailureError");
 
                 } else if (error instanceof ServerError) {
-
                     // Hatayi yakalama
                     System.out.println(error.getMessage());
                     System.out.println(error.toString());
@@ -254,27 +241,10 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
                 } else if (error instanceof ParseError) {
                     // Indicates that the server response could not be parsed
                     System.out.println("ParseError");
-
                 }
-
             }
-        });/* {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("id", advert.getId());
-                params.put("title", advert.getTitle());
-                params.put("description", advert.getDescription());
-                params.put("price", advert.getPrice());
-
-                System.out.println("params.toString() : " + params.toString());
-                return params;
-            }
-        };*/
-
+        });
         Volley.newRequestQueue(appCompatActivity.getBaseContext()).add(istek);
-
-
     }
 
     public void updateDataRequest() {
@@ -285,17 +255,6 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(appCompatActivity.getBaseContext(), "Advert updated Succesfully", Toast.LENGTH_SHORT).show();
-/*                try {
-//                    System.out.println("gelen cevap : " + response);
-//                    JSONObject jsonObject = new JSONObject(response);
-//                    System.out.println("+++++");
-//                    System.out.println(jsonObject.toString());
-//                    System.out.println("-----");
-
-                } catch (JSONException e) {
-                    System.out.println("hataya dustuuuuuuuuuuuu " + e.getMessage());
-                    e.printStackTrace();
-                }*/
                 switchFragmentToMyAdvertPageFragment();
             }
         }, new Response.ErrorListener() {
@@ -323,9 +282,7 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
                 } else if (error instanceof ParseError) {
                     // Indicates that the server response could not be parsed
                     System.out.println("ParseError");
-
                 }
-
             }
         }) {
             @Override
@@ -339,10 +296,7 @@ public class AdvertInfoFragmentClickedMyAdvertPage extends Fragment {
                 return params;
             }
         };
-
         Volley.newRequestQueue(appCompatActivity.getBaseContext()).add(istek);
-
-
     }
 
 }

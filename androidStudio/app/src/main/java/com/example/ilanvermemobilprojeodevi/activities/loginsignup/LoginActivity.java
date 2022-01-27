@@ -1,11 +1,9 @@
 package com.example.ilanvermemobilprojeodevi.activities.loginsignup;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +23,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ilanvermemobilprojeodevi.R;
 import com.example.ilanvermemobilprojeodevi.activities.program.mainmenu.MainMenuActivity;
-import com.example.ilanvermemobilprojeodevi.db.user.Customer;
 import com.example.ilanvermemobilprojeodevi.services.ValidationService;
 
 import org.json.JSONArray;
@@ -33,13 +30,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class LoginActivity extends AppCompatActivity {
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
+
 
     EditText usernameEditText, passwordEditText;
     ValidationService validationService = new ValidationService();
@@ -48,22 +44,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        Toast.makeText(getBaseContext(), "D:\\Udemy\\Kapsamlı Android Programlama Eğitimi\\10. Web Servis Eğitimi  adresinde rest api var", Toast.LENGTH_SHORT).show();
-//        System.out.println(">>>>>>>>>>>>>>>> D:\\Udemy\\Kapsamlı Android Programlama Eğitimi\\10. Web Servis Eğitimi  adresinde rest api var");
         usernameEditText = findViewById(R.id.usernameTxt_Login);
         passwordEditText = findViewById(R.id.passwordTxt_Login);
 
         setSingupPageBtnProcess(findViewById(R.id.singupPageBtn_Login));
         setLoginBtnProcess(findViewById(R.id.loginBtn_Login));
-       /* findViewById(R.id.singupPageBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchActivityToNewActivity(SingUpActivity.class);
-
-            }
-        });*/
-
-
     }
 
     String getTextFromEditText(EditText editText) {
@@ -80,19 +65,19 @@ public class LoginActivity extends AppCompatActivity {
                 passwordEditText = findViewById(R.id.passwordTxt_Login);
                 username = getTextFromEditText(usernameEditText);
                 password = getTextFromEditText(passwordEditText);
-//                if (validateLoginProcess(username, password)) {
 
                 if (validateLoginInputValues(username, password))
                     loginToApplication(username, password);
-                usernameEditText.setText("");
-                passwordEditText.setText("");
 
-
-//                    switchActivityToNewActivity(MainMenuActivity.class, false);
-//                }
+                resetLoginInput();
 
             }
         });
+    }
+
+    void resetLoginInput() {
+        usernameEditText.setText("");
+        passwordEditText.setText("");
     }
 
     boolean validateLoginInputValues(String username, String password) {
@@ -125,23 +110,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
     }
 
-    /*boolean validateLoginProcess(String username, String password) {
-        Customer registeredCustomer = validationService.validateLoginProcess(username, password);
-        String toastMessage;
-        if (registeredCustomer != null) {
-            return true;
-        } else {
-            toastMessage = "Kullanici adi veya sifre hatali Lutfen tekrar deneyiniz";
-            Toast.makeText(getBaseContext(), toastMessage, Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-    }*/
-
-    SharedPreferences sp;
-    SharedPreferences.Editor editor;
-
-
     public void loginToApplication(String username, String password) {
 
         StringRequest istek = new StringRequest(Request.Method.POST, "http://10.0.2.2:3000/api/user/login", new Response.Listener<String>() {
@@ -165,33 +133,16 @@ public class LoginActivity extends AppCompatActivity {
                         String password = b.getString("password");
                         String phone = b.getString("phone");
 
-
-                        Set<String> hs = new HashSet<String>();
-                        // Adding elements to Set
-                        // using add() method
-                        // Custom input elements
-                        hs.add("A");
-                        hs.add("B");
-                        hs.add("C");
-
-                        //Veri kaydetme
                         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                        //Veri kaydetme
                         editor.putString("id", id);
                         editor.putString("username", username);
                         editor.putString("mail", mail);
                         editor.putString("fullName", fullName);
                         editor.putString("phone", phone);
                         editor.putString("password", password);
-                        editor.putStringSet("set", hs);
-
                         editor.apply();
 
-                        //Veri alma
-//                        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-//                        String kayitliId = prefs.getString("id", "null");
-
-
-//                        Toast.makeText(getBaseContext(), "Basarili" + id, Toast.LENGTH_SHORT).show();
                         switchActivityToNewActivity(MainMenuActivity.class, false);
                     }
                     System.out.println(">>>>>>>>>>>> " + jsonArray);
@@ -204,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getBaseContext(), "hata "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "On ErrorResponse \n", Toast.LENGTH_SHORT).show();
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     //This indicates that the reuest has either time out or there is no connection
@@ -224,9 +175,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (error instanceof ParseError) {
                     // Indicates that the server response could not be parsed
                     System.out.println("ParseError");
-
                 }
-
             }
         }) {
             @Override
@@ -234,20 +183,9 @@ public class LoginActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username);
                 params.put("password", password);
-                System.out.println("params  :" + params.toString());
-
                 return params;
             }
         };
-
         Volley.newRequestQueue(getBaseContext()).add(istek);
-
-
     }
-
-
-    /*@Override
-    public void onBackPressed() {
-        finish();
-    }*/
 }

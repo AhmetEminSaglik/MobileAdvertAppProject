@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/androidStudio/app/src/main/res/drawable/advert_logo.xml" value="0.2734375" />
         <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/androidStudio/app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
         <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/androidStudio/app/src/main/res/layout/advert_info_clicked_homepage.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/androidStudio/app/src/main/res/layout/homepage_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/androidStudio/app/src/main/res/layout/newadvert_fragment.xml" value="0.3654891304347826" />
         <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/androidStudio/app/src/main/res/layout/profil_fragment.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/androidStudio/app/src/main/res/layout/profilupdate_fragment.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/ahmet/AndroidStudioProjects/IlanVermeMobilProjeOdevi/androidStudio/app/src/main/res/menu/bottommenu.xml" value="0.25" />

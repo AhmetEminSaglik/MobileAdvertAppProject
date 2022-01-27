@@ -1,7 +1,6 @@
 package com.example.ilanvermemobilprojeodevi.services.validation;
 
 import com.example.ilanvermemobilprojeodevi.db.advert.Advert;
-import com.example.ilanvermemobilprojeodevi.db.user.Customer;
 
 public class AdvertValidationService {
 
@@ -15,7 +14,6 @@ public class AdvertValidationService {
     }
 
     public boolean validateInputLenght(String input, String inputName) throws Exception {
-
         if (input.length() != 0)
             return true;
         throw new Exception(inputName + " can not be empty ");

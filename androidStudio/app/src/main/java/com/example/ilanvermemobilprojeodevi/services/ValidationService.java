@@ -8,6 +8,7 @@ import com.example.ilanvermemobilprojeodevi.services.validation.ProfilUpdateVali
 import com.example.ilanvermemobilprojeodevi.services.validation.SingupValidationService;
 
 public class ValidationService {
+
     public boolean validateSingUpProcess(Customer customer) throws Exception {
         return new SingupValidationService().validate(customer);
     }
@@ -23,6 +24,5 @@ public class ValidationService {
     public boolean validateAdvertCreationInputs(Advert advert) throws Exception {
         return new AdvertValidationService().validate(advert);
     }
-
 
 }
