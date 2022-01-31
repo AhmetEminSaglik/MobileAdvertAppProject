@@ -32,7 +32,7 @@ public class MainMenuActivity extends AppCompatActivity {
         String mail = prefs.getString("mail", "null");
         String password = prefs.getString("password", "null");
         String fullName = prefs.getString("fullName", "null");
-        Set<String> set = prefs.getStringSet("set", null);
+//        Set<String> set = prefs.getStringSet("set", null);
 
         Customer customer = new Customer(kayitliId, fullName, username, password, phone, mail);
 

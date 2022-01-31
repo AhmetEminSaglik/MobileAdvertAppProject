@@ -154,7 +154,7 @@ public class NewAdvertPageFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(appCompatActivity.getBaseContext(), "onErrorResponse  :" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(appCompatActivity.getBaseContext(), "onErrorResponse  :" + error.toString(), Toast.LENGTH_SHORT).show();
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     //This indicates that the reuest has either time out or there is no connection
@@ -188,6 +188,7 @@ public class NewAdvertPageFragment extends Fragment {
                 params.put("description", advert.getDescription());
                 params.put("price", advert.getPrice());
                 params.put("image", advert.getImageString());
+                System.out.println(params);
                 return params;
             }
         };

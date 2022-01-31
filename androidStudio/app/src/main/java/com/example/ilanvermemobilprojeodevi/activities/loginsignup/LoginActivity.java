@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setSingupPageBtnProcess(findViewById(R.id.singupPageBtn_Login));
         setLoginBtnProcess(findViewById(R.id.loginBtn_Login));
+        iconGuncelleme();
     }
 
     String getTextFromEditText(EditText editText) {
@@ -187,5 +188,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
         Volley.newRequestQueue(getBaseContext()).add(istek);
+    }
+
+    void iconGuncelleme(){
+//        setContentView(R.layout.homepage_fragment);
+
     }
 }
