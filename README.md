@@ -1,5 +1,5 @@
 # Mobil Advert App Project
--  I shared just my android screenshots. And I coded web service with nodejs. And I got a little help from my college friend  <a href ="https://github.com/necatichdar"> @Necati Çuhadar </a>
+-  I shared just my android screenshots. I coded with Java and I coded web service with nodejs. And I got a little help from my college friend  <a href ="https://github.com/necatichdar"> @Necati Çuhadar </a>
 about web service. 
 
 
