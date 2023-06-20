@@ -11,7 +11,9 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        manifestPlaceholders = [
+                network_security_config: "@xml/network_security_config"
+        ]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
