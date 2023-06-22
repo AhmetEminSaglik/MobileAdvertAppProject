@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
@@ -73,6 +74,7 @@ public class SingUpActivity extends AppCompatActivity {
         StringRequest istek = new StringRequest(Request.Method.POST, "http://10.0.2.2:3000/api/user", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                System.out.println("RESPONSE : SIGNUP PROCESS: ");
                 String toastMessage = "Signed up successfully, you can log in";
                 Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show();
                 switchActivityToNewActivity(LoginActivity.class);
@@ -80,6 +82,7 @@ public class SingUpActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                System.out.println("ERROR OCURED ON SIGNUP PROCESS: ");
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     //This indicates that the reuest has either time out or there is no connection
                     System.out.println("timeout");
@@ -106,15 +109,24 @@ public class SingUpActivity extends AppCompatActivity {
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+                System.out.println("GET PARAMS  ON SIGNUP PROCESS: ");
                 Map<String, String> params = new HashMap<>();
                 params.put("username", customer.getUsername());
                 params.put("fullName", customer.getFullName());
                 params.put("password", customer.getPassword());
                 params.put("phone", customer.getPhoneNo());
                 params.put("mail", customer.geteMail());
+                System.out.println(params);
                 return params;
             }
         };
+        
+        int MY_SOCKET_TIMEOUT_MS = 5000; // Zaman aşımı süresini 5 saniye olarak ayarlayın
+        istek.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         Volley.newRequestQueue(context).add(istek);
     }
 

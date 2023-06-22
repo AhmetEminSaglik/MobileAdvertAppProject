@@ -1,6 +1,7 @@
 package com.example.ilanvermemobilprojeodevi.activities.program.fragment.homepage;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,7 +73,12 @@ public class AdvertInfoFragmentClickedHomePage extends Fragment {
 
         titleTxtView.setText(advert.getTitle());
         descriptionTxtView.setText(advert.getDescription());
-        priceTxtView.setText(advert.getPrice() + " TL");
+        titleTxtView.setTypeface(null, Typeface.BOLD);
+        titleTxtView.setTextSize(25);
+        descriptionTxtView.setTextSize(20);
+        priceTxtView.setText(advert.getPrice() + " $");
+        priceTxtView.setTextSize(25);
+        priceTxtView.setTypeface(null, Typeface.BOLD);
         Picasso.get().load("http://10.0.2.2:3000" + advert.getImageString()).into(imageView);
 
         kullaniciBilgileriniGetir();
